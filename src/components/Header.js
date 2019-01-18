@@ -15,6 +15,10 @@ const styles = {
   grow: {
     flexGrow: 1,
   },
+  hoverRight: {
+    position: 'fixed',
+    right: '40px',
+  },
 };
 
 function ButtonAppBar(props) {
@@ -26,7 +30,7 @@ function ButtonAppBar(props) {
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Lightweight Email Campaigner
           </Typography>
-          <Button color="inherit" onClick={handleLogoutBtnClick}>
+          <Button color="inherit" onClick={handleLogoutBtnClick} className={classes.hoverRight}>
             Logout
           </Button>
         </Toolbar>
