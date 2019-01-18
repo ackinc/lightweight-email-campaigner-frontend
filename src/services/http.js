@@ -37,7 +37,7 @@ function processRequestError(err) {
   const { response, request, message, config } = err;
 
   if (response) { // received a non-2xx response from server
-    const { status, data } = response.status;
+    const { status, data } = response;
 
     // if the server response has an error message, use that
     // else use the generic error message provided by axios
