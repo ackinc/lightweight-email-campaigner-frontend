@@ -54,55 +54,56 @@ function processRequestError(err) {
 
   // request sent, but did not receive a response from the server
   if (request) {
-    // this is fun
-    if (/EAI_AGAIN/.test(message)) throw new NetworkError('We are offline');
-    if (/ENOTFOUND/.test(message)) throw new NetworkError('The server could not be found');
-    if (/ECONNREFUSED/.test(message)) throw new BadRequestError('There is no server application listening at that address');
-    if (/socket hang up/i.test(message)) throw new BadRequestError('The server refused our request');
-    if (/(EPROTO)|(parse error)/i.test(message)) throw new BadRequestError('The server speaks a different protocol');
-    throw new ServerError(message); // the server probably crashed
+    // this is for fun
+    if (/EAI_AGAIN/.test(message)) throw new NetworkError();
+    if (/ENOTFOUND/.test(message)) throw new HTTPError(); // host could not be found
+    if (/ECONNREFUSED/.test(message)) throw new HTTPError(); // no server listening at that address
+    if (/socket hang up/i.test(message)) throw new HTTPError(); // server refused to service the request
+    if (/(EPROTO)|(parse error)/i.test(message)) throw new HTTPError(); // server speaks a different protocol
+
+    throw new HTTPError('The request was made, but the server did not respond for an unknown reason'); // the server probably crashed
   }
 
   // error occurred while setting up the request
-  throw new Error(message);
+  throw new HTTPError(message);
 }
 
-class ResourceNotFoundError extends Error {
-  constructor(message = 'The server could not find the requested resource') {
+class HTTPError extends Error {
+  constructor(message = 'Something went wrong with the request') {
     super(message);
-    this.name = 'NetworkError';
+    this.name = 'HTTPError';
   }
 }
 
-class BadRequestError extends Error {
-  constructor(message = 'There was something wrong with your request') {
-    super(message);
-    this.name = 'NetworkError';
-  }
-}
-
-class NetworkError extends Error {
+class NetworkError extends HTTPError {
   constructor(message = 'You seem to be offline') {
     super(message);
     this.name = 'NetworkError';
   }
 }
 
-class ServerError extends Error {
+class ServerError extends HTTPError {
   constructor(message = 'Something went wrong on the server') {
     super(message);
     this.name = 'ServerError';
   }
 }
 
-class AuthError extends Error {
-  constructor(message = 'The auth credentials you sent were invalid') {
+class ResourceNotFoundError extends HTTPError {
+  constructor(message = 'The server could not find the requested resource') {
+    super(message);
+    this.name = 'ResourceNotFoundError';
+  }
+}
+
+class AuthError extends HTTPError {
+  constructor(message = 'You are not authorized to make this request') {
     super(message);
     this.name = 'AuthError';
   }
 }
 
-class InvalidInputError extends Error {
+class InvalidInputError extends HTTPError {
   constructor(message = 'The input you sent was invalid') {
     super(message);
     this.name = 'InputError';
