@@ -1,3 +1,11 @@
 module.exports = {
-    "extends": "airbnb"
+    "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest": true
+    },
+    "rules": {
+        "react/jsx-filename-extension": "disable"
+    }
 };
