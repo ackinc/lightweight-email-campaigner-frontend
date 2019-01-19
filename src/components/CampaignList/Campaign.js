@@ -12,6 +12,8 @@ import {
 } from '@material-ui/core';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
+import CampaignLeadsTable from './CampaignLeadsTable';
+
 const styles = theme => ({
   root: {
     margin: '20px auto',
@@ -25,7 +27,7 @@ const styles = theme => ({
 
 function Campaign({ data, classes }) {
   const {
-    name, subject, body, createdAt, n_leads, n_delivered, n_opened,
+    id, name, subject, body, createdAt, n_leads, n_delivered, n_opened,
   } = data;
   return (
     <ExpansionPanel className={classes.root}>
@@ -44,7 +46,7 @@ function Campaign({ data, classes }) {
         />
       </ExpansionPanelSummary>
 
-      <ExpansionPanelDetails>
+      <ExpansionPanelDetails style={{ display: 'block' }}>
         <DataList
           data={{
             'Email Subject': subject,
@@ -52,6 +54,8 @@ function Campaign({ data, classes }) {
           }}
           styles={{ width: '100%' }}
         />
+
+        <CampaignLeadsTable campaignId={id} />
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
