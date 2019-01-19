@@ -16,7 +16,7 @@ const styles = {
     flexGrow: 1,
   },
   hoverRight: {
-    position: 'fixed',
+    position: 'absolute',
     right: '40px',
   },
 };
@@ -25,7 +25,7 @@ function ButtonAppBar(props) {
   const { classes } = props;
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="relative">
         <Toolbar>
           <Typography variant="h6" color="inherit" className={classes.grow}>
             Lightweight Email Campaigner
