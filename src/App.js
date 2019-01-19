@@ -5,11 +5,13 @@ import SignInComponent from './components/SignIn';
 import HeaderComponent from './components/Header';
 import DashboardComponent from './components/Dashboard';
 
+import { checkLoggedIn } from './services/user';
+
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      loggedIn: false,
+      loggedIn: checkLoggedIn(),
     };
   }
 

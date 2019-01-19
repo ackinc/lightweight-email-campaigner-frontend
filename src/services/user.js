@@ -5,6 +5,10 @@ export async function loginUser(payload) {
   window.localStorage.setItem('token', token);
 }
 
+export function checkLoggedIn() {
+  return window.localStorage.getItem('token') !== null;
+}
+
 export function logoutUser() {
   window.localStorage.removeItem('token');
 }
