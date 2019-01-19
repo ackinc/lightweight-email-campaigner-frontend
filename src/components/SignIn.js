@@ -64,9 +64,6 @@ class SignIn extends React.Component {
 
           <GoogleLogin
             clientId="748917549487-hoeukkchunsdntek65gepkdgs8nsgpio.apps.googleusercontent.com"
-            scope="https://www.googleapis.com/auth/gmail.compose"
-            accessType="offline"
-            responseType="code"
             isSignedIn={false}
             buttonText="Login"
             onSuccess={this.onSuccess}
@@ -83,9 +80,10 @@ class SignIn extends React.Component {
     );
   }
 
-  onSuccess = async ({ code }) => {
+  onSuccess = async ga => {
+    const idToken = ga.getAuthResponse().id_token;
     try {
-      await loginUser({ authCode: code });
+      await loginUser({ idToken });
     } catch (e) {
       return this.onFailure(e);
     }
