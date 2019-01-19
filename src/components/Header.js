@@ -27,8 +27,10 @@ function ButtonAppBar(props) {
     <div className={classes.root}>
       <AppBar position="relative">
         <Toolbar>
-          <Typography variant="h6" color="inherit" className={classes.grow}>
-            Lightweight Email Campaigner
+          <Typography variant="h5" color="inherit" className={classes.grow}>
+            <a href="/" style={{ color: 'white', textDecoration: 'none' }}>
+              Lightweight Email Campaigner
+            </a>
           </Typography>
           <Button color="inherit" onClick={handleLogoutBtnClick} className={classes.hoverRight}>
             Logout
