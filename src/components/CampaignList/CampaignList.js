@@ -40,7 +40,9 @@ class CampaignList extends React.Component {
       <div className="campaign-list" style={{ textAlign: 'center' }}>
         {error ?
           <div style={{ color: 'red' }}>{error}</div> :
-          campaigns.map(campaign => <Campaign key={campaign.id} data={campaign} />)}
+          campaigns.length ?
+            campaigns.map(campaign => <Campaign key={campaign.id} data={campaign} />) :
+            <p>No campaigns to show</p>}
       </div>
     )
   }
