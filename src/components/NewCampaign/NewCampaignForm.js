@@ -29,7 +29,7 @@ class NewCampaignForm extends React.Component {
       this.setState({ success: 'Campaign emails are on their way!' });
 
       // close the dialog after a little bit
-      setTimeout(this.props.onSubmit, 2000);
+      setTimeout(this.props.onSubmit, 1000);
     } catch (e) {
       let msg = e.message;
       if (e.message === 'NO_LEADS_VALID') msg = 'None of the leads were valid emails';
