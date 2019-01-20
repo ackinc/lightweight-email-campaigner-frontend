@@ -68,7 +68,7 @@ function DataList({ data, styles }) {
         <ListItem key={k}>
           <ListItemText>
             <Typography variant="caption">{k}</Typography>
-            <Typography variant="body1">{data[k]}</Typography>
+            <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>{data[k]}</Typography>
           </ListItemText>
         </ListItem>
       ))}
