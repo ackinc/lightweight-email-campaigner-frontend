@@ -37,6 +37,7 @@ class NewCampaignForm extends React.Component {
     } catch (e) {
       let msg = e.message;
       if (e.message === 'NO_LEADS_VALID') msg = 'None of the leads were valid emails';
+      else if (e.message === 'NOT_AUTHORIZED') msg = `You must have the role 'marketer' to create campaigns`;
 
       this.setState({ error: msg });
       setSubmitting(false);
