@@ -11,7 +11,7 @@ export function get(url, query, needAuth = false) {
   if (needAuth) {
     const token = window.localStorage.getItem('token');
     if (token) config.headers = { authorization: token };
-    else throw new AuthError('Request needs to carry auth, but no auth token found');
+    else throw new AuthenticationError('Request needs to carry auth, but no auth token found');
   }
 
   return axios.get(url, config)
@@ -25,7 +25,7 @@ export function post(url, data, needAuth = false) {
   if (needAuth) {
     const token = window.localStorage.token;
     if (token) config.headers = { authorization: token };
-    else throw new AuthError('Request needs to carry auth, but no auth token found');
+    else throw new AuthenticationError('Request needs to carry auth, but no auth token found');
   }
 
   return axios.post(url, data, config)
@@ -45,7 +45,8 @@ function processRequestError(err) {
 
     if (status >= 500) throw new ServerError(errMsg);
     if (status === 404) throw new ResourceNotFoundError('The requested resource was not found');
-    if (status >= 401) throw new AuthError(errMsg);
+    if (status === 403) throw new AuthorizationError(errMsg);
+    if (status === 401) throw new AuthenticationError(errMsg);
     /* status === 400 */ throw new InvalidInputError(errMsg);
   }
 
@@ -96,7 +97,14 @@ class ResourceNotFoundError extends HTTPError {
   }
 }
 
-class AuthError extends HTTPError {
+class AuthorizationError extends HTTPError {
+  constructor(message = 'You are not authorized to make this request') {
+    super(message);
+    this.name = 'AuthError';
+  }
+}
+
+class AuthenticationError extends HTTPError {
   constructor(message = 'You are not authorized to make this request') {
     super(message);
     this.name = 'AuthError';
