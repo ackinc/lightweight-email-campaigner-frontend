@@ -3,7 +3,7 @@ import axios from 'axios';
 const RUNNING_ON_LOCALHOST = /localhost/.test(window.location.origin);
 const BACKEND_LOCATION = RUNNING_ON_LOCALHOST ?
   'http://localhost:8000' :
-  'https://khonvo-challenge-backend.herokuapp.com';
+  'https://lightweight-email-campaigner.herokuapp.com';
 
 export function get(url, query, needAuth = false) {
   const config = { baseURL: BACKEND_LOCATION, params: query };
