@@ -1,49 +1,51 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
-import withStyles from '@material-ui/core/styles/withStyles';
+import React from "react";
+import PropTypes from "prop-types";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Paper from "@material-ui/core/Paper";
+import Typography from "@material-ui/core/Typography";
+import withStyles from "@material-ui/core/styles/withStyles";
 
-import { GoogleLogin } from 'react-google-login';
+import { GoogleLogin } from "react-google-login";
 
-import { loginUser } from '../services/user';
+import { loginUser } from "../services/user";
 
-const styles = theme => ({
+const styles = (theme) => ({
   main: {
-    width: 'auto',
-    display: 'block', // Fix IE 11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+    width: "auto",
+    display: "block", // Fix IE 11 issue.
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
+    [theme.breakpoints.up(400 + theme.spacing(3 * 2))]: {
       width: 400,
-      marginLeft: 'auto',
-      marginRight: 'auto',
+      marginLeft: "auto",
+      marginRight: "auto",
     },
   },
   paper: {
-    marginTop: theme.spacing.unit * 8,
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(
+      3
+    )}px`,
   },
   heading: {
-    marginBottom: theme.spacing.unit * 4,
+    marginBottom: theme.spacing(4),
   },
   subheading: {
-    marginBottom: theme.spacing.unit,
+    marginBottom: theme.spacing(1),
   },
   error: {
-    color: 'red',
-    marginTop: theme.spacing.unit,
+    color: "red",
+    marginTop: theme.spacing(1),
   },
 });
 
 class SignIn extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { error: '' };
+    this.state = { error: "" };
   }
 
   render() {
@@ -58,7 +60,11 @@ class SignIn extends React.Component {
             Lightweight Email Campaigner
           </Typography>
 
-          <Typography component="h1" variant="subtitle2" className={classes.subheading}>
+          <Typography
+            component="h1"
+            variant="subtitle2"
+            className={classes.subheading}
+          >
             Please sign in to continue
           </Typography>
 
@@ -70,17 +76,21 @@ class SignIn extends React.Component {
             onFailure={this.onFailure}
           />
 
-          {error ?
-            <Typography component="h1" variant="caption" className={classes.error}>
+          {error ? (
+            <Typography
+              component="h1"
+              variant="caption"
+              className={classes.error}
+            >
               {error}
-            </Typography> :
-            null}
+            </Typography>
+          ) : null}
         </Paper>
       </main>
     );
   }
 
-  onSuccess = async ga => {
+  onSuccess = async (ga) => {
     const idToken = ga.getAuthResponse().id_token;
     try {
       await loginUser({ idToken });
@@ -88,13 +98,15 @@ class SignIn extends React.Component {
       return this.onFailure(e);
     }
     this.props.login();
-  }
+  };
 
-  onFailure = err => this.setState({
-    error: `Error during sign-in: ${err.message || err.details || err.error || err}`,
-  })
+  onFailure = (err) =>
+    this.setState({
+      error: `Error during sign-in: ${
+        err.message || err.details || err.error || err
+      }`,
+    });
 }
-
 
 SignIn.propTypes = {
   classes: PropTypes.object.isRequired,
@@ -102,8 +114,7 @@ SignIn.propTypes = {
 };
 
 SignIn.defaultProps = {
-  onSuccess: () => { },
+  onSuccess: () => {},
 };
-
 
 export default withStyles(styles)(SignIn);
