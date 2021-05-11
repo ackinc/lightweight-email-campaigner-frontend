@@ -74,6 +74,7 @@ class SignIn extends React.Component {
             buttonText="Login"
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
+            scope="profile email https://www.googleapis.com/auth/gmail.send"
           />
 
           {error ? (
