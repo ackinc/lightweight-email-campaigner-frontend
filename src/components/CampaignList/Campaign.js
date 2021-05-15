@@ -26,8 +26,7 @@ const styles = (theme) => ({
 });
 
 function Campaign({ data, classes }) {
-  const { id, name, subject, body, createdAt, n_leads, n_delivered, n_opened } =
-    data;
+  const { id, name, subject, body, createdAt, n_leads, n_opened } = data;
   return (
     <ExpansionPanel className={classes.root}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
