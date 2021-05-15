@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import Campaign from './Campaign';
-import { getCampaigns } from '../../services/campaign';
-import { logoutUser } from '../../services/user'
+import Campaign from "./Campaign";
+import { getCampaigns } from "../../services/campaign";
+import { logoutUser } from "../../services/user";
 
 class CampaignList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       campaigns: [],
-      error: '',
+      error: "",
     };
   }
 
@@ -22,18 +22,23 @@ class CampaignList extends React.Component {
     try {
       campaigns = await getCampaigns();
     } catch (e) {
-      if (e.name === 'AuthError') {
-        this.setState({ error: 'Your token has expired. Please log in again. Redirecting you to the log in page...' });
+      if (e.name === "AuthError") {
+        this.setState({
+          error:
+            "Your token has expired. Please log in again. Redirecting you to the log in page...",
+        });
 
         // log the user out automatically
         logoutUser();
-        setTimeout(() => window.location.href = "/", 4 * 1000);
+        setTimeout(() => (window.location.href = "/"), 4 * 1000);
       } else {
         this.setState({ error: e.message });
       }
       return;
     }
-    campaigns.sort((a, b) => a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0);
+    campaigns.sort((a, b) =>
+      a.createdAt < b.createdAt ? 1 : a.createdAt > b.createdAt ? -1 : 0
+    );
     this.setState({ campaigns });
   }
 
@@ -41,14 +46,18 @@ class CampaignList extends React.Component {
     const { campaigns, error } = this.state;
 
     return (
-      <div className="campaign-list" style={{ textAlign: 'center' }}>
-        {error ?
-          <div style={{ color: 'red' }}>{error}</div> :
-          campaigns.length ?
-            campaigns.map(campaign => <Campaign key={campaign.id} data={campaign} />) :
-            <p>No campaigns to show</p>}
+      <div className="campaign-list" style={{ textAlign: "center" }}>
+        {error ? (
+          <div style={{ color: "red" }}>{error}</div>
+        ) : campaigns.length ? (
+          campaigns.map((campaign) => (
+            <Campaign key={campaign.id} data={campaign} />
+          ))
+        ) : (
+          <p>No campaigns to show</p>
+        )}
       </div>
-    )
+    );
   }
 }
 

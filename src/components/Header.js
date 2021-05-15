@@ -1,12 +1,12 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Button from '@material-ui/core/Button';
+import React from "react";
+import PropTypes from "prop-types";
+import { withStyles } from "@material-ui/core/styles";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import Button from "@material-ui/core/Button";
 
-import { logoutUser } from '../services/user';
+import { logoutUser } from "../services/user";
 
 const styles = {
   root: {
@@ -16,8 +16,8 @@ const styles = {
     flexGrow: 1,
   },
   hoverRight: {
-    position: 'absolute',
-    right: '40px',
+    position: "absolute",
+    right: "40px",
   },
 };
 
@@ -28,11 +28,15 @@ function ButtonAppBar(props) {
       <AppBar position="relative">
         <Toolbar>
           <Typography variant="h5" color="inherit" className={classes.grow}>
-            <a href="/" style={{ color: 'white', textDecoration: 'none' }}>
+            <a href="/" style={{ color: "white", textDecoration: "none" }}>
               Lightweight Email Campaigner
             </a>
           </Typography>
-          <Button color="inherit" onClick={handleLogoutBtnClick} className={classes.hoverRight}>
+          <Button
+            color="inherit"
+            onClick={handleLogoutBtnClick}
+            className={classes.hoverRight}
+          >
             Logout
           </Button>
         </Toolbar>
@@ -52,7 +56,7 @@ ButtonAppBar.propTypes = {
 };
 
 ButtonAppBar.defaultProps = {
-  logout: () => { },
+  logout: () => {},
 };
 
 export default withStyles(styles)(ButtonAppBar);

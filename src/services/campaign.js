@@ -1,7 +1,7 @@
-import { get, post } from './http';
+import { get, post } from "./http";
 
 export async function getCampaigns() {
-  const { campaigns } = await get('/campaigns', null, true);
+  const { campaigns } = await get("/campaigns", null, true);
   return campaigns;
 }
 
@@ -11,5 +11,5 @@ export async function getLeadsForCampaign(campaignId) {
 }
 
 export async function createCampaign(name, subject, body, leads) {
-  await post('/campaigns', { name, subject, body, leads }, true);
+  await post("/campaigns", { name, subject, body, leads }, true);
 }

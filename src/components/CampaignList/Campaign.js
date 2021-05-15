@@ -1,6 +1,6 @@
-import { parse, format } from 'date-fns';
-import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import { parse, format } from "date-fns";
+import React from "react";
+import { withStyles } from "@material-ui/core/styles";
 import {
   ExpansionPanel,
   ExpansionPanelSummary,
@@ -9,15 +9,15 @@ import {
   ListItem,
   ListItemText,
   Typography,
-} from '@material-ui/core';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+} from "@material-ui/core";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 
-import CampaignLeadsTable from './CampaignLeadsTable';
+import CampaignLeadsTable from "./CampaignLeadsTable";
 
-const styles = theme => ({
+const styles = (theme) => ({
   root: {
-    margin: '20px auto',
-    width: '60%',
+    margin: "20px auto",
+    width: "60%",
   },
   heading: {
     fontSize: theme.typography.pxToRem(15),
@@ -26,32 +26,32 @@ const styles = theme => ({
 });
 
 function Campaign({ data, classes }) {
-  const {
-    id, name, subject, body, createdAt, n_leads, n_delivered, n_opened,
-  } = data;
+  const { id, name, subject, body, createdAt, n_leads, n_delivered, n_opened } =
+    data;
   return (
     <ExpansionPanel className={classes.root}>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <DataList
           data={{
-            'Campaign Name': name,
-            'Created At': format(parse(createdAt), 'h:mma, D MMM YYYY'),
+            "Campaign Name": name,
+            "Created At": format(parse(createdAt), "h:mma, D MMM YYYY"),
           }}
         />
-        <DataList data={{
-          '# Leads': n_leads,
-          '% Opened': `${Math.round(n_opened / n_leads * 100)}%`,
-        }}
+        <DataList
+          data={{
+            "# Leads": n_leads,
+            "% Opened": `${Math.round((n_opened / n_leads) * 100)}%`,
+          }}
         />
       </ExpansionPanelSummary>
 
-      <ExpansionPanelDetails style={{ display: 'block' }}>
+      <ExpansionPanelDetails style={{ display: "block" }}>
         <DataList
           data={{
-            'Email Subject': subject,
-            'Email Body': body,
+            "Email Subject": subject,
+            "Email Body": body,
           }}
-          styles={{ width: '100%' }}
+          styles={{ width: "100%" }}
         />
 
         <CampaignLeadsTable campaignId={id} />
@@ -62,17 +62,19 @@ function Campaign({ data, classes }) {
 
 function DataList({ data, styles }) {
   return (
-    <List dense={true} style={{ width: '50%', ...styles }}>
-      {Reflect.ownKeys(data).map(k => (
+    <List dense={true} style={{ width: "50%", ...styles }}>
+      {Reflect.ownKeys(data).map((k) => (
         <ListItem key={k}>
           <ListItemText>
             <Typography variant="caption">{k}</Typography>
-            <Typography variant="body1" style={{whiteSpace: 'pre-line'}}>{data[k]}</Typography>
+            <Typography variant="body1" style={{ whiteSpace: "pre-line" }}>
+              {data[k]}
+            </Typography>
           </ListItemText>
         </ListItem>
       ))}
     </List>
-  )
+  );
 }
 
 export default withStyles(styles)(Campaign);
