@@ -46,6 +46,9 @@ class SignIn extends React.Component {
   constructor(props) {
     super(props);
     this.state = { error: "" };
+
+    this.onSuccess = this.onSuccess.bind(this);
+    this.onFailure = this.onFailure.bind(this);
   }
 
   render() {
@@ -91,7 +94,7 @@ class SignIn extends React.Component {
     );
   }
 
-  onSuccess = async (ga) => {
+  async onSuccess(ga) {
     const {
       id_token: idToken,
       access_token: accessToken,
@@ -109,14 +112,15 @@ class SignIn extends React.Component {
       return this.onFailure(e);
     }
     this.props.login();
-  };
+  }
 
-  onFailure = (err) =>
+  onFailure(err) {
     this.setState({
       error: `Error during sign-in: ${
         err.message || err.details || err.error || err
       }`,
     });
+  }
 }
 
 SignIn.propTypes = {

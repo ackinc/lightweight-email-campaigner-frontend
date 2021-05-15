@@ -12,9 +12,11 @@ class NewCampaignForm extends React.Component {
       success: "",
       error: "",
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleSubmit = async (values, { setSubmitting }) => {
+  async handleSubmit(values, { setSubmitting }) {
     const recipientsFromTextInput = (values.recipients || "").split(/[,\s]/);
     let recipientsFromFileInput = [];
 
@@ -46,7 +48,7 @@ class NewCampaignForm extends React.Component {
       this.setState({ error: msg });
       setSubmitting(false);
     }
-  };
+  }
 
   render() {
     return (
@@ -63,9 +65,7 @@ class NewCampaignForm extends React.Component {
         {({
           values,
           errors,
-          touched,
           handleChange,
-          handleBlur,
           handleSubmit,
           isSubmitting,
           setFieldValue,

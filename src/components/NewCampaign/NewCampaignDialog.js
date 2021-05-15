@@ -8,17 +8,24 @@ import DialogTitle from "@material-ui/core/DialogTitle";
 import NewCampaignFormComponent from "./NewCampaignForm";
 
 export default class FormDialog extends React.Component {
-  state = {
-    open: false,
-  };
+  constructor(props) {
+    super(props);
 
-  handleClickOpen = () => {
+    this.state = {
+      open: false,
+    };
+
+    this.handleClickOpen = this.handleClickOpen.bind(this);
+    this.handleClose = this.handleClose.bind(this);
+  }
+
+  handleClickOpen() {
     this.setState({ open: true });
-  };
+  }
 
-  handleClose = () => {
+  handleClose() {
     this.setState({ open: false });
-  };
+  }
 
   render() {
     const btnStyles = {

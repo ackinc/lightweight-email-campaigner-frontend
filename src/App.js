@@ -13,11 +13,18 @@ class App extends Component {
     this.state = {
       loggedIn: checkLoggedIn(),
     };
+
+    this.setLoggedIn = this.setLoggedIn.bind(this);
+    this.setLoggedOut = this.setLoggedOut.bind(this);
   }
 
-  setLoggedIn = () => this.setState({ loggedIn: true });
+  setLoggedIn() {
+    this.setState({ loggedIn: true });
+  }
 
-  setLoggedOut = () => this.setState({ loggedIn: false });
+  setLoggedOut() {
+    this.setState({ loggedIn: false });
+  }
 
   render() {
     const { loggedIn } = this.state;

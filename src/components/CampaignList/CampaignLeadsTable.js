@@ -29,14 +29,17 @@ class SimpleTable extends React.Component {
       hide: true,
       leads: null,
     };
+
+    this.toggleTable = this.toggleTable.bind(this);
+    this.getLeads = this.getLeads.bind(this);
   }
 
-  toggleTable = () => {
+  toggleTable() {
     this.setState(({ hide }) => {
       if (hide && this.state.leads === null) this.getLeads();
       return { hide: !hide };
     });
-  };
+  }
 
   async getLeads() {
     try {
