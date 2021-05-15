@@ -2,6 +2,7 @@ import React from 'react';
 
 import Campaign from './Campaign';
 import { getCampaigns } from '../../services/campaign';
+import { logoutUser } from '../../services/user'
 
 class CampaignList extends React.Component {
   constructor(props) {
@@ -22,8 +23,11 @@ class CampaignList extends React.Component {
       campaigns = await getCampaigns();
     } catch (e) {
       if (e.name === 'AuthError') {
-        this.setState({ error: 'Authentication failure. Please log out and log in again.' });
-        // TODO: log the user out automatically
+        this.setState({ error: 'Your token has expired. Please log in again. Redirecting you to the log in page...' });
+
+        // log the user out automatically
+        logoutUser();
+        setTimeout(() => window.location.href = "/", 4 * 1000);
       } else {
         this.setState({ error: e.message });
       }

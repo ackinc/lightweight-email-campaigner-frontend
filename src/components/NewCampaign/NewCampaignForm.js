@@ -35,17 +35,9 @@ class NewCampaignForm extends React.Component {
       // TODO: better way to refresh campaign list
       setTimeout(() => window.location.reload(), 1000);
     } catch (e) {
-      let msg = e.message;
+      let msg = e.error || e.message;
       if (e.message === 'NO_LEADS_VALID') msg = 'None of the leads were valid emails';
-      else if (e.message === 'NOT_AUTHORIZED') msg = `
-      Since emails are sent out from an account with a third-party email-sending service,
-      usage of this tool has been restricted to prevent abuse.
-      
-      You must be authorized by the developer before you can create campaigns.
-      
-      Please send an email to anirudh.nimmagadda@gmail.com if you would like to test
-      this tool out.
-      `;
+      else if (e.message === 'TOKEN_EXPIRED') msg = `Your token has expired. Please log in again.`;
 
       this.setState({ error: msg });
       setSubmitting(false);
