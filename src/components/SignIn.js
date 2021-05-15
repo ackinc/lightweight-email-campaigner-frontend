@@ -74,6 +74,7 @@ class SignIn extends React.Component {
             buttonText="Login"
             onSuccess={this.onSuccess}
             onFailure={this.onFailure}
+            scope="profile email https://www.googleapis.com/auth/gmail.send"
           />
 
           {error ? (
@@ -91,9 +92,19 @@ class SignIn extends React.Component {
   }
 
   onSuccess = async (ga) => {
-    const idToken = ga.getAuthResponse().id_token;
+    const {
+      id_token: idToken,
+      access_token: accessToken,
+      scope: accessTokenScope,
+      expires_at: accessTokenExpiresAt,
+    } = ga.getAuthResponse();
     try {
-      await loginUser({ idToken });
+      await loginUser({
+        idToken,
+        accessToken,
+        accessTokenScope,
+        accessTokenExpiresAt,
+      });
     } catch (e) {
       return this.onFailure(e);
     }

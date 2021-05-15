@@ -40,7 +40,6 @@ function Campaign({ data, classes }) {
         />
         <DataList data={{
           '# Leads': n_leads,
-          '% Delivered': `${Math.round(n_delivered / n_leads * 100)}%`,
           '% Opened': `${Math.round(n_opened / n_leads * 100)}%`,
         }}
         />
