@@ -71,7 +71,6 @@ class SimpleTable extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell>Email</TableCell>
-                <TableCell align="right">Delivered At</TableCell>
                 <TableCell align="right">Opened At</TableCell>
               </TableRow>
             </TableHead>
@@ -82,7 +81,6 @@ class SimpleTable extends React.Component {
                       <TableCell component="th" scope="row">
                         {lead.email}
                       </TableCell>
-                      <TableCell align="right">{lead.deliveredAt}</TableCell>
                       <TableCell align="right">{lead.openedAt}</TableCell>
                     </TableRow>
                   ))
